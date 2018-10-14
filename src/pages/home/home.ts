@@ -23,6 +23,8 @@ export class HomePage {
   myIcon: string;
   desp;
   showElap;
+  card2show = false;
+  recordDur;
 
   constructor(public navCtrl: NavController) {
   }
@@ -129,7 +131,7 @@ export class HomePage {
       setToggleButton();
       // CHECK IF NO DESCRIPTION ENTERED
       if (that.desp === undefined) {
-        that.desp = "[no project selected]";
+        that.desp = "[no description entered]";
       }
       // START BUTTON IS CLICKED
       if (time.running) {
@@ -168,9 +170,11 @@ export class HomePage {
       } else {
         clearInterval(counter);
         console.log('clicked Stop');
-        const recordDur = that.showElap;
+        that.recordDur = that.showElap;
         console.log(that.showElap);
-        // CLOSE DB AND RECORD DURATION
+        // ADD CARD OF ENTRY
+        that.card2show = true;
+        // CLOSE DB ENTRY AND RECORD DURATION
         // doHomework(entriesJS.closeEntry(recordDur), reset());
         doHomework(function closeEntry() {
           db.collection('Entries').where('Order', '==', 1)
@@ -181,7 +185,7 @@ export class HomePage {
                 db.collection('Entries').doc(doc.id).update({
                   Order: 2,
                   Stop_Time: firebase.firestore.FieldValue.serverTimestamp(),
-                  Duration: recordDur,
+                  Duration: that.recordDur,
                 });
               });
             })

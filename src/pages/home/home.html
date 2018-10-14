@@ -34,4 +34,28 @@
 		</ion-list>
 	</ion-card>
 
+	<ion-card *ngIf="card2show">
+		<ion-list>
+
+			<ion-item class="card">
+				<ion-icon name="bulb" item-start></ion-icon>
+				<p ion-item id="elap" item-start>{{ desp }}</p>
+			</ion-item>
+
+			<ion-item class="card">
+				<ion-icon name="clock" item-start id="clockIC"></ion-icon>
+				<p ion-item id="elap" item-start>{{ recordDur }}</p>
+				<ion-icon name="filing" item-end></ion-icon>
+			</ion-item>
+
+			<ion-item class="card">
+				<button icon-only item-start id="startBtn">
+					<ion-icon [name]="myIcon" item-start id="iconBtn"></ion-icon>
+				</button>
+				<button ion-item id="projectBtn" item-end>Project</button>
+			</ion-item>
+
+		</ion-list>
+  </ion-card>
+
 </ion-content>
