@@ -1,0 +1,37 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Ionic Blank
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+
+
+	<ion-card>
+		<ion-list>
+
+			<ion-item class="card">
+				<ion-icon name="bulb" item-start></ion-icon>
+				<ion-input type="text" [(ngModel)]="desp" placeholder="What are you doing?">
+				</ion-input>
+			</ion-item>
+
+			<ion-item class="card">
+				<ion-icon name="clock" item-start id="clockIC"></ion-icon>
+				<p ion-item id="elap" item-start>{{ showElap }}</p>
+				<ion-icon name="filing" item-end></ion-icon>
+			</ion-item>
+
+			<ion-item class="card">
+				<button icon-only item-start id="startBtn">
+					<ion-icon [name]="myIcon" item-start id="iconBtn"></ion-icon>
+				</button>
+				<button ion-item id="projectBtn" item-end>Project</button>
+			</ion-item>
+
+		</ion-list>
+	</ion-card>
+
+</ion-content>
