@@ -127,6 +127,7 @@ export class HomePage {
       }
       time.running = !time.running;
       setToggleButton();
+      // CHECK IF NO DESCRIPTION ENTERED
       if (that.desp === undefined) {
         that.desp = "[no project selected]";
       }
