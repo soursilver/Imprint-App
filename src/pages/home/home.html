@@ -34,28 +34,31 @@
 		</ion-list>
 	</ion-card>
 
-	<ion-card *ngIf="card2show">
-		<ion-list>
-
-			<ion-item class="card">
-				<ion-icon name="bulb" item-start></ion-icon>
-				<p ion-item id="elap" item-start>{{ desp }}</p>
-			</ion-item>
-
-			<ion-item class="card">
-				<ion-icon name="clock" item-start id="clockIC"></ion-icon>
-				<p ion-item id="elap" item-start>{{ recordDur }}</p>
-				<ion-icon name="filing" item-end></ion-icon>
-			</ion-item>
-
-			<ion-item class="card">
-				<button icon-only item-start id="startBtn">
-					<ion-icon [name]="myIcon" item-start id="iconBtn"></ion-icon>
-				</button>
-				<button ion-item id="projectBtn" item-end>Project</button>
-			</ion-item>
-
-		</ion-list>
-  </ion-card>
+	<ion-card id="card-color" *ngIf="card2show">
+		<ion-card-header text-center id="card-header">
+			October 15, 3:00 AM - 3:30 AM
+		</ion-card-header>
+		<ion-grid>
+			<ion-row class="row-height" align-items-center>
+				<ion-col col-3 text-center class="entry-col1 font-color1">
+					Project
+				</ion-col>
+				<ion-col col-6 text-center class="entry-col1 font-color2">
+					{{ desp }}
+				</ion-col>
+				<ion-col col-3 text-center class="entry-col1 font-color3">
+					{{ recordDur }}
+				</ion-col>
+			</ion-row>
+			<ion-row class="row-height" align-items-center>
+				<ion-col class="entry-col1 tags-font-color">
+					Coding, Javascript, TS, Ionic
+				</ion-col>
+				<ion-col col-2 text-center>
+					<ion-icon name="play" class="icon-color"></ion-icon>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
 
 </ion-content>
