@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
 import firebase from 'firebase';
 import 'firebase/firestore';
+import { ModalController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
-// import {entries} from './entries.ts';
 import { firebaseConfig } from '../../environment';
+import { TagsModalPage } from '../tags-modal/tags-modal';
+// import {entries} from './entries.ts';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -26,7 +28,11 @@ export class HomePage {
   card2show = false;
   recordDur;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  }
+
+  public openModal() {
+  const modalPage = this.modalCtrl.create(TagsModalPage); modalPage.present();
   }
 
   public ionViewDidLoad() {
