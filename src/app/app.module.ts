@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { TagsModalPage } from '../pages/tags-modal/tags-modal';
 
 // import { AngularFireModule } from '@angular/fire';
 // import { firebaseConfig } from '../environment';
@@ -16,7 +17,8 @@ import { HomePage } from '../pages/home/home';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    TagsModalPage,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    TagsModalPage,
   ],
   providers: [
     StatusBar,
