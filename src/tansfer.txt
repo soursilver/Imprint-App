@@ -1,0 +1,90 @@
+#style.less#
+
+@strong-orange:     #F78C6A;
+@orange:            #FFCB6B;
+@light-orange:      #FFE082;
+@green:             #59e0ac;
+@cyan:              #a2fcff;
+@scarlet:           #ff8b78;
+@test:              #ff0000;
+
+.syntax--ts {
+    .syntax--constant {
+        color: #9b61b3;
+    }
+
+    .syntax--comment {
+      color: #78887f;
+      font-style: italic;
+    }
+
+    .syntax--support {
+        &.syntax--variable {
+            &.syntax--property {
+                color: #8ad3f4;
+            }
+            &.syntax--property.syntax--dom {
+                color: #89d2f3;
+            }
+        }
+    }
+
+    .syntax--entity {
+        &.syntax--name {
+            &.syntax--type {
+                color: #9b61b3; // not changing
+            }
+        }
+    }
+
+    .syntax--variable {
+        &.syntax--property {
+            color: #b573d1; // not sure
+        }
+        &.syntax--other.syntax--object {
+            color: #b573d1; // not sure
+        }
+        &.syntax--other.syntax--object.syntax--property {
+            color: @scarlet;
+        }
+    }
+
+    .syntax--string.syntax--quoted.syntax--template {
+      .syntax--other.syntax--object.syntax--property {
+          color: #da6e38; // not sure
+      }
+    }
+
+    .syntax--constant {
+        &.syntax--numeric {
+            color: #da6e38; //not sure
+        }
+
+        &.syntax--boolean {
+            color: @cyan;
+        }
+    }
+
+    .syntax--punctuation.syntax--begin,
+    .syntax--punctuation.syntax--end,
+    .syntax--delimiter.syntax--object.syntax--comma,
+    .syntax--brace.syntax--curly {
+        color: #e4e4d8;
+    }
+
+    .syntax--export .syntax--variable.syntax--default {
+        color: #3fb46b;
+    }
+
+    .syntax--support {
+        &.syntax--type {
+            color: @green;
+        }
+    }
+    .syntax--meta {
+        &.syntax--class {
+            color: @green;
+        }
+    }
+
+}

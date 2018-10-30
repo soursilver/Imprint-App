@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
-@IonicPage()
 @Component({
   selector: 'page-tags-modal',
   templateUrl: 'tags-modal.html',
 })
 export class TagsModalPage {
-
-  projectTags;
-  myParam2;
-
-  constructor(public navCtrl: NavController, public params: NavParams, public viewCtrl: ViewController) {
-    // this.projectTags = params.get('myParam');
-    this.projectTags = params.get('data');
-    // console.log("projectTags",this.projectTags)
-  }
+  // load all tags from firebase
+  allTags = ["Javascript", "Coding", "Ionic", "Angular", "Kotlin", "Java"];
+  receivedTags;
+  availTags;
+  returnTags;
 
   helloName: boolean = true;
   card2show: boolean = true;
+
+  constructor(public navCtrl: NavController, public params: NavParams, public viewCtrl: ViewController) {
+    this.receivedTags = params.get('data');
+    this.returnTags = this.receivedTags.concat();
+  }
 
   // this will calculate the difference btwn the two
   arr_diff(a1, a2) {
@@ -41,45 +41,37 @@ export class TagsModalPage {
     return diff;
   }
 
-  openTags = [];
-  newTags = [];
-
   public ionViewDidLoad() {
-    // result from firebase query (all tags that that exist)
-    const fbArr = ["Javascript", "Coding", "Ionic", "Angular", "Kotlin", "Java"];
-    // result from DocID tags field
-    const docArr = this.projectTags; //["Javascript","Coding","Ionic"];
-    console.log(this.projectTags)
+    console.log("tags from receivedTags: ", this.receivedTags);
     function doHomework(subject, callback1) {
-      subject;
-      callback1;
+      const subject;
+      const callback1;
     }
 
-    doHomework(this.openTags = this.arr_diff(fbArr, docArr), this.card2show = true);
-    console.log(this.openTags);
+    doHomework(this.availTags = this.arr_diff(this.allTags, this.receivedTags), this.card2show = true);
+    console.log("these are the tags available", this.availTags);
+    console.log("returnTags=", this.returnTags);
   }
 
   updateTags(value, status: boolean) {
-    if (this.newTags.indexOf(value) === -1 && status) {
-      this.newTags.push(value);
-      console.log("pushed to array", this.newTags)
+    if (this.returnTags.indexOf(value) === -1 && status) { // if not found [-1] is returned
+      this.returnTags.push(value);
+      console.log("pushed to returnTags", this.returnTags);
+      console.log("tags from receivedTags: ", this.receivedTags);
     } else {
       console.log("in else");
-      for (var i = 0; i < this.newTags.length; i++) {
-        console.log("for loop runs")
-        if (this.newTags[i] === value) {
-          this.newTags.splice(i, 1);
-          console.log("removed item")
-          console.log(this.newTags)
+      for (const i = 0; i < this.returnTags.length; i++) {
+        console.log("for loop runs");
+        if (this.returnTags[i] === value) {
+          this.returnTags.splice(i, 1);
+          console.log("removed item from returnTags ", this.returnTags);
         }
       }
     }
   }
 
   dismissModal() {
-    this.myParam2 = this.newTags;
-    this.navCtrl.push(HomePage, { 'sendToHome': this.myParam2 });
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(this.returnTags);
   }
 
 }

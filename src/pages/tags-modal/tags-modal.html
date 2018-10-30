@@ -15,12 +15,12 @@
 
 <ion-content *ngIf="card2show">
 
-<ion-item *ngFor="let tags1 of projectTags">
+<ion-item *ngFor="let tags1 of receivedTags">
     <ion-label>{{tags1}}</ion-label>
-    <ion-checkbox color="dark" [checked]="helloName"></ion-checkbox>
+    <ion-checkbox color="dark" [checked]="helloName" (ionChange)="updateTags(tags1,$event)"></ion-checkbox>
 </ion-item>
 
-<ion-item *ngFor="let tags2 of openTags; let i = index">
+<ion-item *ngFor="let tags2 of availTags; let i = index">
     <ion-label value="tags2">{{tags2}}</ion-label>
     <ion-checkbox color="dark" [checked]="tags2.currentValue" (ionChange)="updateTags(tags2,$event)"></ion-checkbox>
 </ion-item>

@@ -22,12 +22,8 @@ db.settings({
 })
 export class HomePage {
 
-  // tags from Modal
-  receivedTags: string[];
   // this loads from firebase DocID tags field
-  fbTags: string[] = ["Javascript", "Coding", "Ionic"];
-  // tags from Modal + firebase
-  projectTags: string[];
+  mainTags: string[] = ["Javascript", "Coding", "Ionic"];
 
   myIcon: string;
   desp;
@@ -36,19 +32,20 @@ export class HomePage {
   recordDur;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public params: NavParams) {
-    // collect what was sent from Modal
-    this.receivedTags = params.get('sendToHome');
-    // if something was collected, add to what was collected from firebase
-    if (this.receivedTags !== undefined) {
-      this.fbTags = this.fbTags.concat(this.receivedTags);
-    }
-    //project tags will always equal firebase tags at minimum
-    this.projectTags = this.fbTags;
   }
 
   public openModal() {
-    this.navCtrl.push(TagsModalPage, { data: this.projectTags.slice() });
-    // const modalPage = this.modalCtrl.create(TagsModalPage); modalPage.present();
+    // this.navCtrl.push(TagsModalPage, { data: this.projectTags.slice() });
+    const modalPage = this.modalCtrl.create(TagsModalPage, { data: this.mainTags.slice() });
+    modalPage.present();
+
+    modalPage.onDidDismiss((data) => {
+      if (data !== undefined) {
+        // if something was collected, add to what was collected from firebase
+        this.mainTags = data;
+        // project tags will always equal firebase tags at minimum
+      }
+    });
   }
 
   public ionViewDidLoad() {
