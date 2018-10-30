@@ -13,16 +13,18 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-item *ngFor="let tags1 of docArr">
+<ion-content *ngIf="card2show">
+
+<ion-item *ngFor="let tags1 of projectTags">
     <ion-label>{{tags1}}</ion-label>
     <ion-checkbox color="dark" [checked]="helloName"></ion-checkbox>
-  </ion-item>
+</ion-item>
 
-  <ion-item *ngFor="let tags2 of fbArr">
-    <ion-label>{{tags2}}</ion-label>
-    <ion-checkbox color="dark" checked="false"></ion-checkbox>
-  </ion-item>
+<ion-item *ngFor="let tags2 of openTags; let i = index">
+    <ion-label value="tags2">{{tags2}}</ion-label>
+    <ion-checkbox color="dark" [checked]="tags2.currentValue" (ionChange)="updateTags(tags2,$event)"></ion-checkbox>
+</ion-item>
 
-  <button ion-button (click)="dismissModal()">Close</button>
+<button ion-button (click)="dismissModal()">Close</button>
+
 </ion-content>

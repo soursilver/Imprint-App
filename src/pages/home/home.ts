@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import firebase from 'firebase';
 import 'firebase/firestore';
-import { ModalController } from 'ionic-angular';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { firebaseConfig } from '../../environment';
 import { TagsModalPage } from '../tags-modal/tags-modal';
+import { ModalController } from 'ionic-angular';
 // import {entries} from './entries.ts';
 
 firebase.initializeApp(firebaseConfig);
@@ -22,17 +22,33 @@ db.settings({
 })
 export class HomePage {
 
+  // tags from Modal
+  receivedTags: string[];
+  // this loads from firebase DocID tags field
+  fbTags: string[] = ["Javascript", "Coding", "Ionic"];
+  // tags from Modal + firebase
+  projectTags: string[];
+
   myIcon: string;
   desp;
   showElap;
   card2show = false;
   recordDur;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public params: NavParams) {
+    // collect what was sent from Modal
+    this.receivedTags = params.get('sendToHome');
+    // if something was collected, add to what was collected from firebase
+    if (this.receivedTags !== undefined) {
+      this.fbTags = this.fbTags.concat(this.receivedTags);
+    }
+    //project tags will always equal firebase tags at minimum
+    this.projectTags = this.fbTags;
   }
 
   public openModal() {
-  const modalPage = this.modalCtrl.create(TagsModalPage); modalPage.present();
+    this.navCtrl.push(TagsModalPage, { data: this.projectTags.slice() });
+    // const modalPage = this.modalCtrl.create(TagsModalPage); modalPage.present();
   }
 
   public ionViewDidLoad() {
