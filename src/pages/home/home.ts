@@ -23,7 +23,8 @@ db.settings({
 export class HomePage {
 
   // this loads from firebase DocID tags field
-  mainTags: string[] = ["Javascript", "Coding", "Ionic"];
+  mainTags: string[] = [];
+  sendTags: string[] = []; // only to be populated after main entry card
 
   myIcon: string;
   desp;
@@ -32,17 +33,33 @@ export class HomePage {
   recordDur;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public params: NavParams) {
+    const that = this;
+    db.collection("Entries")
+      .get()
+      .then(function(querySnapshot) {
+        let foundTags = [];
+        let showArr = [];
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+        //  console.log(doc.id, " => ", doc.get("Tags"));
+          foundTags = (Object.values(doc.get("Tags")));
+          showArr = showArr.concat(foundTags);
+          console.log("showArr: ", showArr);
+          that.mainTags = showArr;
+        });
+      });
   }
 
   public openModal() {
     // this.navCtrl.push(TagsModalPage, { data: this.projectTags.slice() });
-    const modalPage = this.modalCtrl.create(TagsModalPage, { data: this.mainTags.slice() });
+    const modalPage = this.modalCtrl.create(TagsModalPage, { data: this.mainTags.slice(),
+      data2: this.sendTags.slice() });
     modalPage.present();
 
     modalPage.onDidDismiss((data) => {
       if (data !== undefined) {
         // if something was collected, add to what was collected from firebase
-        this.mainTags = data;
+        this.sendTags = data;
         // project tags will always equal firebase tags at minimum
       }
     });
