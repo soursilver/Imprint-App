@@ -21,7 +21,9 @@
 			<ion-item class="card">
 				<ion-icon name="clock" item-start id="clockIC"></ion-icon>
 				<p ion-item id="elap" item-start>{{ showElap }}</p>
-				<ion-icon name="filing" item-end></ion-icon>
+				<button ion-item item-end (click)="openModal()">
+					<ion-icon name="filing" item-end></ion-icon>
+				</button>
 			</ion-item>
 
 			<ion-item class="card">
@@ -60,7 +62,5 @@
 			</ion-row>
 		</ion-grid>
 	</ion-card>
-
-	<button ion-button (click)="openModal()">Open Modal</button>
 
 </ion-content>

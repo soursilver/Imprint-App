@@ -8,7 +8,7 @@ import { HomePage } from '../home/home';
 })
 export class TagsModalPage {
   // load all tags from firebase
-  allTags = ["Javascript", "Coding", "Ionic", "Angular", "Kotlin", "Java"];
+  allTags = [];
   receivedTags;
   availTags;
   returnTags;
@@ -17,7 +17,9 @@ export class TagsModalPage {
   card2show: boolean = true;
 
   constructor(public navCtrl: NavController, public params: NavParams, public viewCtrl: ViewController) {
-    this.receivedTags = params.get('data');
+    this.allTags = params.get('data');
+    this.receivedTags = params.get('data2');
+    console.log(this.receivedTags);
     this.returnTags = this.receivedTags.concat();
   }
 
